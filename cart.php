@@ -18,7 +18,7 @@ $a->add($iditem, $_GET['quantity'], $products[$iditem]['price']);
     <table>
         <?php
         foreach ($a->cart['items'] as $key => $items) {
-            echo '<tr><td>' . 'id товара:' . $iditem . '</td><td>'
+            echo '<tr><td>' . 'id:' . $iditem . '</td><td>'
                 . 'Наиминование товара:' . $products[$iditem]['name'] . '</td><td>' . 'Количество:' . $_GET['quantity'] . '</td><td><a href=/delete.php?id = ' . $key . '>Удалить</a></td ></tr>';
         }
         ?>

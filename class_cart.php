@@ -17,7 +17,7 @@ class Cart
         $this->setDiscount();
         $this->setItems();
         $this->setSum();
-        $this->calc();
+        //$this->calc();
     }
 
     public function add($id, $quantity, $price)
@@ -32,6 +32,7 @@ class Cart
                 }
             }
         }
+        $this->calc();
     }
     public function calc()
     {
@@ -90,6 +91,10 @@ class Cart
     public function getCount()
     {
         return $this->count;
+    }
+    public function __destruct()
+    {
+        $_SESSION['cart'] = $this->cart;
     }
 }
 

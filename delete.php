@@ -9,6 +9,7 @@ function delete($id)
             unset($this->cart[$key]);
         }
     }
+    $this->calc();
 }
 
 ?>
