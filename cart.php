@@ -1,9 +1,9 @@
 <?php
 session_start();
-include 'class_cart.php';
+include_once 'init.php';
 $a = new Cart();
 $iditem = $_GET['products'];
-$a->add($_GET['products'], $_GET['quantity'], $products[$iditem]['price']);
+$a->add($iditem, $_GET['quantity'], $products[$iditem]['price']);
 ?>
 
 <!DOCTYPE html>
@@ -23,9 +23,7 @@ $a->add($_GET['products'], $_GET['quantity'], $products[$iditem]['price']);
         }
         ?>
     </table>
-
     <form action="" method="GET">
-
         <select name="products">
             <option value="0">Choose your items</option>
             <?php
@@ -34,16 +32,10 @@ $a->add($_GET['products'], $_GET['quantity'], $products[$iditem]['price']);
             }
             ?>
         </select><br>
-
-
         Количество:<br>
         <input name="quantity" type="text"><br>
         <input type="submit" name="" value="Get to cart">
-
     </form>
-
-
 </div>
-
 </body>
 </html>

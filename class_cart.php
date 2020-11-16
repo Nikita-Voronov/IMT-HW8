@@ -1,12 +1,5 @@
 <?php
 session_start();
-
-$products = [
-    4 => ['name' => 'Книга', 'price' => 100],
-    12 => ['name' => 'Диск', 'price' => 50],
-    32 => ['name' => 'Флешка', 'price' => 240]
-];
-
 class Cart
 {
     //атрибуты
@@ -45,18 +38,17 @@ class Cart
         $this->sum = 0;
         $this->count = 0;
         $this->discount = 0;
-
         foreach ($this->cart['items'] as $key => $value) {
             $this->sum += $value['price'];
             $this->count += $value['quantity'];
         }
-        if ($this->count < 10 && $this->sum > 2000) {
+        if ($this->sum > 2000) {
             $this->discount = $this->sum * 0.07;
-            $this->sum = $this->sum - $this->discount;
-        } elseif ($this->count> 10) {
-            $this->discount = $this->sum * 0.1;
-            $this->sum = $this->sum - $this->discount;
         }
+        if ($this->count > 10) {
+            $this->discount = $this->sum * 0.1;
+        }
+        $this->sum = $this->sum - $this->discount;
         return ;
     }
 
