@@ -15,6 +15,7 @@ class Cart
         $this->setDiscount();
         $this->setItems();
         $this->setSum();
+        $this->items = $_SESSION['items'];
     }
     public function add($id, $quantity, $price)
     {
@@ -35,7 +36,6 @@ class Cart
         $this->discount = 0;
         if (!empty($this->items)) {
         foreach ($this->items as $key => $value) {
-           // $this->sum += $value['price'];
             $this->sum = $value['price']*$value['quantity'];
             $this->count += $value['quantity'];
         }
@@ -85,7 +85,7 @@ class Cart
     }
     public function __destruct()
     {
-        $_SESSION['cart'] = $this->items;
+        $_SESSION['items'] = $this->items;
     }
 }
 
