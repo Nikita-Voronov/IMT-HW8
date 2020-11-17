@@ -19,12 +19,12 @@ class Cart
     }
     public function add($id, $quantity, $price)
     {
-          $this->items[] = ['id' => $id, 'quantity' => $quantity, 'price' => $price];
+        $this->items[$id] = ['id' => $id, 'quantity' => $quantity, 'price' => $price];
             foreach ($this->items as $key => $value) {
                 if ($value['id'] == $id) {
                     $this->count += $this->items[$key]['quantity'];
-                }else {
-                    $this->items[] = ['id' => $id, 'quantity' => $quantity, 'price' => $price * $quantity];
+                } else {
+                    $this->items[$id] = ['id' => $id, 'quantity' => $quantity, 'price' => $price * $quantity];
                 }
             }$this->calc();
         }
@@ -39,8 +39,6 @@ class Cart
             $this->sum = $value['price']*$value['quantity'];
             $this->count += $value['quantity'];
         }
-        } else {
-            echo "Корзина пуста"."<br>";
         }
         if ($this->sum > 2000) {
             $this->discount = $this->sum * 0.07;
