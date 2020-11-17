@@ -4,7 +4,6 @@ session_start();
 class Cart
 {
     //атрибуты
-    public $cart;
     public $items = [];//элементы корзины
     public $sum;//сумма элементов в корзине
     public $discount;//сумма с учетом скидки
@@ -12,7 +11,6 @@ class Cart
     //метод
     public function __construct()
     {
-        $this->cart = $_SESSION['cart'];
         $this->setCount();
         $this->setDiscount();
         $this->setItems();
@@ -20,26 +18,25 @@ class Cart
     }
     public function add($id, $quantity, $price)
     {
-//$id=$quantity=$price=0;
           $this->items[] = ['id' => $id, 'quantity' => $quantity, 'price' => $price];
             foreach ($this->items as $key => $value) {
                 if ($value['id'] == $id) {
-                    $this->items[$key]['quantity'] += $this->items[$key]['quantity'];
-                    // $this->cart['items'][$key]['price'] *= $this->cart['items'][$key]['quantity'];
+                    $this->count += $this->items[$key]['quantity'];
                 }else {
                     $this->items[] = ['id' => $id, 'quantity' => $quantity, 'price' => $price * $quantity];
                 }
-            }
+            }$this->calc();
         }
-       // $this->calc();
+
     public function calc()
     {
         $this->sum = 0;
         $this->count = 0;
         $this->discount = 0;
-        if (!empty($this->cart)) {
+        if (!empty($this->items)) {
         foreach ($this->items as $key => $value) {
-            $this->sum += $value['price'];
+           // $this->sum += $value['price'];
+            $this->sum = $value['price']*$value['quantity'];
             $this->count += $value['quantity'];
         }
         } else {
@@ -88,7 +85,7 @@ class Cart
     }
     public function __destruct()
     {
-        $_SESSION['cart'] = $this->cart;
+        $_SESSION['cart'] = $this->items;
     }
 }
 

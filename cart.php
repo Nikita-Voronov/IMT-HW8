@@ -22,7 +22,7 @@ $a->calc();
     К оплате <?php echo $a->sum; ?><br><br>
     <table>
         <?php
-        foreach ($a->cart['items'] as $key => $items) {
+        foreach ($a->items as $key => $items) {
             echo '<tr><td>' . 'id:' . $iditem . '</td><td>'
                 . 'Имя товара:' . $products[$iditem]['name'] . '</td><td>' . 'Кол-во:' . $_GET['quantity'] . '</td><td><a href=/delete.php?id = ' . $key . '>Удалить</a></td ></tr>';
         }
