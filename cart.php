@@ -4,8 +4,13 @@ include_once 'init.php';
 $a = new Cart();
 $iditem = $_GET['products'];
 $a->add($iditem, $_GET['quantity'], $products[$iditem]['price']);
+$a->calc();
 ?>
-
+<pre>
+    <?php
+    var_dump($a);
+    ?>
+</pre>
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -19,7 +24,7 @@ $a->add($iditem, $_GET['quantity'], $products[$iditem]['price']);
         <?php
         foreach ($a->cart['items'] as $key => $items) {
             echo '<tr><td>' . 'id:' . $iditem . '</td><td>'
-                . 'Наиминование товара:' . $products[$iditem]['name'] . '</td><td>' . 'Количество:' . $_GET['quantity'] . '</td><td><a href=/delete.php?id = ' . $key . '>Удалить</a></td ></tr>';
+                . 'Имя товара:' . $products[$iditem]['name'] . '</td><td>' . 'Кол-во:' . $_GET['quantity'] . '</td><td><a href=/delete.php?id = ' . $key . '>Удалить</a></td ></tr>';
         }
         ?>
     </table>
