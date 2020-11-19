@@ -5,11 +5,11 @@ include 'cart.php';
 include 'class_cart.php';
 function delete()
 {
-    foreach ($a->cart as $key => $value) {
-        if ($value['id'] == $id) {
-            unset($this->cart[$key]);
+    foreach ($a->items as $key => $value) {
+        if ($value[$key] == $key) {
+            unset($this->items[$key]);
         }
-    }$this->calc();
+    }
 }
 
 ?>

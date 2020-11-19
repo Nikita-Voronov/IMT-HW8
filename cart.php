@@ -3,8 +3,7 @@ session_start();
 include_once 'init.php';
 $a = new Cart();
 $iditem = $_GET['products'];
-$a->add($iditem, $_GET['quantity'], $products[$iditem]['price']);
-$a->calc();
+var_dump ($_GET);
 ?>
 <pre>
     <?php
@@ -17,7 +16,7 @@ $a->calc();
     <meta charset="utf-8">
     <title>Ваша корзина</title>
 </head>
-<body>
+<body style="background-color: #727171">
 <div style="color: #fc9a02">
     К оплате <?php echo $a->sum; ?><br><br>
     <table>
@@ -34,6 +33,7 @@ $a->calc();
             <?php
             foreach ($products as $key => $products) {
                 echo '<option value="' . $key . '">' . $products['name'] . '</option>';
+                $a->add($iditem, $_GET['quantity'], $products[$iditem]['price']);
             }
             ?>
         </select><br>
