@@ -20,14 +20,12 @@ class Cart
     }
     public function add($id, $quantity, $price)
     {
-        $this->items[$id] = ['id' => $id, 'quantity' => $quantity, 'price' => $price];
+       $this->items[$id] = ['id' => $id, 'quantity' => $quantity, 'price' => $price];
             foreach ($this->items as $key => $value) {
                 if ($value['id'] == $id) {
-                    $this->count += $this->items[$id]['quantity'];
-                } else {
-                    $this->items[$id] = ['id' => $id, 'quantity' => $quantity, 'price' => $price];
-               }
-            } $this->calc();
+                    $this->count+= $this->ivalue[$id]['quantity'];
+                }
+            }$this->calc();
         }
 
     public function calc()

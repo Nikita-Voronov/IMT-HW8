@@ -9,7 +9,7 @@ function delete()
         if ($value[$key] == $key) {
             unset($this->items[$key]);
         }
-    }
+    } $this->calc();
 }
 
 ?>
