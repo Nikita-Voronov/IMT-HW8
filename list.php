@@ -1,5 +1,4 @@
 <?php
-session_start();
 $products = [
 4 => ['name' => 'Книга', 'price' => 100],
 12 => ['name' => 'Диск', 'price' => 50],

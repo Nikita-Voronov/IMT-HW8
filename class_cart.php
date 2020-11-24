@@ -1,5 +1,4 @@
 <?php
-session_start();
 
 class Cart
 {
@@ -12,32 +11,54 @@ class Cart
     //метод
     public function __construct()
     {
-        $this->setCount();
-        $this->setDiscount();
-        $this->setItems();
-        $this->setSum();
         $this->items = $_SESSION['items'];
+        $this->calc();
     }
-    public function add($id, $quantity, $price)
+
+    public static function getAllProducts()
     {
-       $this->items[$id] = ['id' => $id, 'quantity' => $quantity, 'price' => $price];
-            foreach ($this->items as $key => $value) {
-                if ($value['id'] == $id) {
-                    $this->count+= $this->ivalue[$id]['quantity'];
-                }
-            }$this->calc();
+        return [
+            4 => ['name' => 'Книга', 'price' => 100],
+            12 => ['name' => 'Диск', 'price' => 50],
+            32 => ['name' => 'Флешка', 'price' => 240]
+        ];
+    }
+
+    public static function getProductById($id)
+    {
+        $products = self::getALLProducts();
+        $product = $products[$id];
+        return isset($products[$id]) ? $products[$id] : null;
+    }
+
+    public function add($id, $quantity)
+    {
+        $product = self::getProductById($id);
+        if (isset($this->items[$id])) {
+            $this->items[$id]['quantity'] += $quantity;
+        } else {
+            $this->items[$id] = ['quantity' => $quantity] + $product;
         }
+        $this->calc();
+    }
+    public function delete($id) {
+        if (isset($this->items[$id])){
+            unset($this->items[$id]);
+        }
+        $this->calc();
+    }
 
     public function calc()
     {
         $this->sum = 0;
         $this->count = 0;
         $this->discount = 0;
-        if (!empty($this->items)) {
-        foreach ($this->items as $key => $value) {
-            $this->sum = $value['price']*$value['quantity'];
-            $this->count += $value['quantity'];
+        if (empty($this->items)) {
+            return;
         }
+        foreach ($this->items as $key => $value) {
+            $this->sum += $value['price'] * $value['quantity'];
+            $this->count += $value['quantity'];
         }
         if ($this->sum > 2000) {
             $this->discount = $this->sum * 0.07;
@@ -46,40 +67,10 @@ class Cart
             $this->discount = $this->sum * 0.1;
         }
         $this->sum = $this->sum - $this->discount;
-        return;
     }
-    public function setSum()
-    {
-        $this->sum = $this->items['sum'];
-    }
-    public function setItems()
-    {
-        $this->items = $this->cart['items'];
-    }
-    public function setDiscount()
-    {
-        $this->discount = $this->items['discount'];
-    }
-    public function setCount()
-    {
-        $this->count = $this->items['count'];
-    }
-    public function getItems()
-    {
-        return $this->items;
-    }
-    public function getSum()
-    {
-        return $this->sum;
-    }
-    public function getDiscount()
-    {
-        return $this->discount;
-    }
-    public function getCount()
-    {
-        return $this->count;
-    }
+
+
+
     public function __destruct()
     {
         $_SESSION['items'] = $this->items;
