@@ -37,7 +37,7 @@ if ($_GET['product']>0){
                 <td>
                     <?php echo $product['quantity'] ?></td>
                 <td>
-                    <a href="/delete.php?id = <?php echo $key?> ">Удалить</a>
+                    <a href=/delete.php?id=<?php echo $key;?>>Удалить</a>
                 </td>
         </tr>
      <?php   } ?>
