@@ -18,7 +18,7 @@ include_once 'users.php';
     </form>
     <?php
     foreach ($users as $key=>$user) {
-        if ($_GET['login'] = $user[$key]['login'] && $_GET['password'] = $user[$key]['passwodr']) {
+        if ($_GET['login'] ==$user[$key]['login'] && $_GET['password'] == $user[$key]['password']) {
             echo "<a href=cart.php>Перейти в корзину</a>";
         }
     }
