@@ -1,7 +1,7 @@
 <?php
 $users=[
-    'admin'=>['login'=>"admin", 'password'=> "admin"],
-    'manager'=>['manager', 'manager']
+    ['login'=>"admin", 'password'=> "admin", 'name'=>"Odmin"],
+    ['login'=>'manager','password'=> 'manager','name'=>"Manaher 1"]
 ];
 
 ?>
